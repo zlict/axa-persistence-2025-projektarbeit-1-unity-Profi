@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-import ch.axa.punchclock.models.Category;
+import ch.axa.punchclock.models.Customer;
 
-public interface CategoryRepository extends CrudRepository<Category, Long> {
+public interface CategoryRepository extends CrudRepository<Customer, Long> {
     
 
 }

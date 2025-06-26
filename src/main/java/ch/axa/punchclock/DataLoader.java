@@ -5,8 +5,8 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
  
-import ch.axa.punchclock.models.Category;
-import ch.axa.punchclock.models.Entry;
+import ch.axa.punchclock.models.Customer;
+import ch.axa.punchclock.models.Vertrag;
 import ch.axa.punchclock.models.Tag;
 import ch.axa.punchclock.repositories.CategoryRepository;
 import ch.axa.punchclock.repositories.EntryRepository;
@@ -29,11 +29,11 @@ public class DataLoader implements ApplicationRunner {
   @Override
   public void run(ApplicationArguments args) throws Exception {
     // Beispiel-Kategorien
-    var category1 = new Category(); category1.setName("Entwicklung");
-    var category2 = new Category(); category2.setName("Meeting");
-    var category3 = new Category(); category3.setName("Support");
-    var category4 = new Category(); category4.setName("Testing");
-    var category5 = new Category(); category5.setName("Dokumentation");
+    var category1 = new Customer(); category1.setName("Entwicklung");
+    var category2 = new Customer(); category2.setName("Meeting");
+    var category3 = new Customer(); category3.setName("Support");
+    var category4 = new Customer(); category4.setName("Testing");
+    var category5 = new Customer(); category5.setName("Dokumentation");
     categoryRepository.save(category1);
     categoryRepository.save(category2);
     categoryRepository.save(category3);
@@ -55,7 +55,7 @@ public class DataLoader implements ApplicationRunner {
     // Beispiel-Einträge für eine Arbeitswoche (Mo-Fr)
     java.time.LocalDateTime base = java.time.LocalDateTime.now().withHour(8).withMinute(0).withSecond(0).withNano(0);
     for (int i = 0; i < 5; i++) {
-      var entry = new Entry();
+      var entry = new Vertrag();
       entry.setDescription("Arbeitstag " + (i + 1));
       entry.setCheckIn(base.plusDays(i));
       entry.setDuration(60 + i * 10);

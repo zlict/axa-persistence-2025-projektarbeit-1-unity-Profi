@@ -12,7 +12,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import ch.axa.punchclock.models.Entry;
+import ch.axa.punchclock.models.Vertrag;
 import jakarta.inject.Inject;
 
 @SpringBootTest
@@ -22,7 +22,7 @@ public class EntryRepositoryTest {
 
 @Test
   public void testIfEntryCanBeSaved1() {
-      Entry entry = new Entry();
+      Vertrag entry = new Vertrag();
       entry.setDescription("Awesome");
       entry.setCheckIn(LocalDateTime.now());
       entry.setDuration(60 * 60 * 2);
@@ -34,7 +34,7 @@ public class EntryRepositoryTest {
 
   @Test
   public void testIfEntryCanBeSaved2() {
-      Entry entry = new Entry();
+      Vertrag entry = new Vertrag();
       entry.setDescription("Awesome");
       entry.setCheckIn(LocalDateTime.now());
       entry.setDuration(60 * 60 * 2);
@@ -46,7 +46,7 @@ public class EntryRepositoryTest {
 
   @Test
   public void testIfEntryCanBeSaved3() {
-      Entry entry = new Entry();
+      Vertrag entry = new Vertrag();
       entry.setDescription("Awesome");
       entry.setCheckIn(LocalDateTime.now());
       entry.setDuration(60 * 60 * 2);
@@ -58,7 +58,7 @@ public class EntryRepositoryTest {
 
   @Test
   public void testIfEntryCanBeSaved4() {
-      Entry entry = new Entry();
+      Vertrag entry = new Vertrag();
       entry.setDescription("Awesome");
       entry.setCheckIn(LocalDateTime.now());
       entry.setDuration(60 * 60 * 2);
@@ -70,7 +70,7 @@ public class EntryRepositoryTest {
 
   @Test
   public void testIfEntryCanBeSaved5() {
-      Entry entry = new Entry();
+      Vertrag entry = new Vertrag();
       entry.setDescription("Awesome");
       entry.setCheckIn(LocalDateTime.now());
       entry.setDuration(60 * 60 * 2);
@@ -82,7 +82,7 @@ public class EntryRepositoryTest {
   }
   @Test
     public void testIfEntryCanBeUpdated() {
-        Entry entry = new Entry();
+        Vertrag entry = new Vertrag();
         entry.setDescription("Initial");
         entry.setCheckIn(LocalDateTime.now());
         entry.setDuration(3600);
@@ -91,18 +91,18 @@ public class EntryRepositoryTest {
         entry.setDescription("Updated");
         entryRepository.save(entry);
 
-        Entry updated = entryRepository.findById(entry.getId()).get();
+        Vertrag updated = entryRepository.findById(entry.getId()).get();
         assertEquals("Updated", updated.getDescription());
     }
 
     @Test
     public void testIfEntryCanBeListed() {
-        Entry entry1 = new Entry();
+        Vertrag entry1 = new Vertrag();
         entry1.setDescription("First");
         entry1.setCheckIn(LocalDateTime.now());
         entry1.setDuration(3600);
 
-        Entry entry2 = new Entry();
+        Vertrag entry2 = new Vertrag();
         entry2.setDescription("Second");
         entry2.setCheckIn(LocalDateTime.now());
         entry2.setDuration(7200);
@@ -110,14 +110,14 @@ public class EntryRepositoryTest {
         entryRepository.save(entry1);
         entryRepository.save(entry2);
 
-        List<Entry> result = new ArrayList<Entry>();
+        List<Vertrag> result = new ArrayList<Vertrag>();
         entryRepository.findAll().forEach(result::add);
         assertTrue(result.size() >= 2);
     }
 
     @Test
     public void testIfEntryCanBeDeleted() {
-        Entry entry = new Entry();
+        Vertrag entry = new Vertrag();
         entry.setDescription("To be deleted");
         entry.setCheckIn(LocalDateTime.now());
         entry.setDuration(1800);

@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import ch.axa.punchclock.models.Entry;
+import ch.axa.punchclock.models.Vertrag;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -19,11 +19,11 @@ public class EntryRepositoryImpl implements EntryRepositoryCustom {
 
 
     @Override
-    public List<Entry> findByDescriptionWithCriteria(String description) {
+    public List<Vertrag> findByDescriptionWithCriteria(String description) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Entry> cq = cb.createQuery(Entry.class);
+        CriteriaQuery<Vertrag> cq = cb.createQuery(Vertrag.class);
 
-        Root<Entry> user = cq.from(Entry.class);
+        Root<Vertrag> user = cq.from(Vertrag.class);
 
         cq.where(cb.like(user.get("description"), "%" + description+"%"));
         

@@ -5,12 +5,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-import ch.axa.punchclock.models.Entry;
+import ch.axa.punchclock.models.Vertrag;
 
-public interface EntryRepository extends CrudRepository<Entry, Long>, EntryRepositoryCustom {
-    Iterable<Entry> findByCategory(@Param("categoryId") Long categoryId);
-    Iterable<Entry> findByTags_Id(@Param("tagId")Long tagId);
+public interface EntryRepository extends CrudRepository<Vertrag, Long>, EntryRepositoryCustom {
+    Iterable<Vertrag> findByCategory(@Param("categoryId") Long categoryId);
+    Iterable<Vertrag> findByTags_Id(@Param("tagId")Long tagId);
     
     @Query(value = "SELECT * FROM entry e WHERE e.description LIKE %:searchDescription%", nativeQuery = true)
-    Iterable<Entry> findByDescription(@Param("searchDescription") String searchDescription);
+    Iterable<Vertrag> findByDescription(@Param("searchDescription") String searchDescription);
 }

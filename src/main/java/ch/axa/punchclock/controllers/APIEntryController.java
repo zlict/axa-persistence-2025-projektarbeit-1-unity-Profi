@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import ch.axa.punchclock.models.Entry;
+import ch.axa.punchclock.models.Vertrag;
 import ch.axa.punchclock.repositories.EntryRepository;
 import jakarta.validation.Valid;
 
@@ -24,13 +24,13 @@ public class APIEntryController {
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   @Operation(summary = "Create a new entry", description = "Creates a new entry and returns the created entity.")
-  public Entry create(@RequestBody @Valid Entry entry) {
+  public Vertrag create(@RequestBody @Valid Vertrag entry) {
     return entryRepository.save(entry);
   }
 
   @GetMapping
   @Operation(summary = "Get entries", description = "Returns a list of entries, optionally filtered by category, tag, or description.")
-  public Iterable<Entry> index(
+  public Iterable<Vertrag> index(
     @Parameter(description = "Category ID to filter entries") @RequestParam(required = false) Long categoryId,
     @Parameter(description = "Tag ID to filter entries") @RequestParam(required = false) Long tagId,
     @Parameter(description = "Search in description") @RequestParam(required = false) String searchDescription) {
@@ -47,20 +47,20 @@ public class APIEntryController {
 
   @GetMapping("/{id}")
   @Operation(summary = "Get entry by ID", description = "Returns an entry by its ID.")
-  public ResponseEntity<Entry> read(@Parameter(description = "ID of the entry to retrieve") @PathVariable Long id) {
+  public ResponseEntity<Vertrag> read(@Parameter(description = "ID of the entry to retrieve") @PathVariable Long id) {
     return ResponseEntity.of(entryRepository.findById(id));
   }
 
   @PutMapping("/{id}")
   @Operation(summary = "Update an entry", description = "Updates an existing entry by its ID.")
-  public Entry update(@Parameter(description = "ID of the entry to update") @PathVariable Long id, @RequestBody @Valid Entry entry) {
+  public Vertrag update(@Parameter(description = "ID of the entry to update") @PathVariable Long id, @RequestBody @Valid Vertrag entry) {
     entry.setId(id);
     return entryRepository.save(entry);
   }
 
   @DeleteMapping("/{id}")
   @Operation(summary = "Delete an entry", description = "Deletes an entry by its ID.")
-  public ResponseEntity<Entry> delete(@Parameter(description = "ID of the entry to delete") @PathVariable Long id) {
+  public ResponseEntity<Vertrag> delete(@Parameter(description = "ID of the entry to delete") @PathVariable Long id) {
     var entry = entryRepository.findById(id);
     if(entry.isPresent()) {
       entryRepository.delete(entry.get());
