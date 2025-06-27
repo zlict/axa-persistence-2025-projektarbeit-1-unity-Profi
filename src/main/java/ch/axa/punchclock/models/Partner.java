@@ -1,5 +1,6 @@
 package ch.axa.punchclock.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import java.util.HashSet;
@@ -24,6 +25,7 @@ public class Partner {
     private String phone;
 
     @OneToMany(mappedBy = "partner")
+    @JsonIgnoreProperties({"partner", "vertrag", "claimHandlers"})
     private Set<Claim> claims = new HashSet<>();
 
    

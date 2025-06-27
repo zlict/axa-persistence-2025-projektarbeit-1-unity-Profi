@@ -1,5 +1,6 @@
 package ch.axa.punchclock.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.time.LocalDate;
 
 import jakarta.persistence.*;
@@ -17,7 +18,7 @@ public class Vertrag {
     @NotBlank(message = "Policenummer darf nicht leer sein")
     @Column(name = "policy_number")
     private String policyNumber;
-
+ 
     @NotBlank(message = "Produktname darf nicht leer sein")
     @Column(name = "product_name")
     private String productName;
@@ -32,6 +33,7 @@ public class Vertrag {
 
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = true)
+    @JsonIgnoreProperties({"vertraege"})
     private Customer customer;
 
     public Vertrag() {}

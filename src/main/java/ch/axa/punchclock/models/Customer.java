@@ -1,6 +1,9 @@
 package ch.axa.punchclock.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,6 +16,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "customer")
@@ -31,9 +35,9 @@ public class Customer {
     @Column(name = "lastName")
     private String lastName;
 
-    @NotBlank(message = "Customer Date darf nicht leer sein")
+    @NotNull(message = "Customer Date darf nicht leer sein")
     @Column(name= "dateOfBirth")
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
 
     @NotBlank(message = "Customer Adresse darf nicht leer sein")
     @Column(name= "adress")
@@ -44,6 +48,7 @@ public class Customer {
     private String email;
 
     @OneToMany(mappedBy = "customer")
+    @JsonIgnoreProperties({"customer"})
     private Set<Vertrag> vertraege = new HashSet<>();
     
     public long getId() {
@@ -70,11 +75,11 @@ public class Customer {
         this.lastName = lastName;
     }
 
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

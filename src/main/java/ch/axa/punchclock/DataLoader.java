@@ -4,75 +4,131 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
- 
-import ch.axa.punchclock.models.Customer;
-import ch.axa.punchclock.models.Vertrag;
-import ch.axa.punchclock.models.Tag;
-import ch.axa.punchclock.repositories.CategoryRepository;
-import ch.axa.punchclock.repositories.EntryRepository;
-import ch.axa.punchclock.repositories.TagRepository;
- 
+
+import ch.axa.punchclock.models.*;
+import ch.axa.punchclock.repositories.*;
+
+import java.time.LocalDate;
+import java.util.*;
+
 @Component
 public class DataLoader implements ApplicationRunner {
- 
-  @Autowired
-  private CategoryRepository categoryRepository;
- 
-  @Autowired
-  private EntryRepository entryRepository;
- 
-  @Autowired
-  private TagRepository tagRepository;
- 
- 
- 
-  @Override
-  public void run(ApplicationArguments args) throws Exception {
-    // Beispiel-Kategorien
-    var category1 = new Customer(); category1.setName("Entwicklung");
-    var category2 = new Customer(); category2.setName("Meeting");
-    var category3 = new Customer(); category3.setName("Support");
-    var category4 = new Customer(); category4.setName("Testing");
-    var category5 = new Customer(); category5.setName("Dokumentation");
-    categoryRepository.save(category1);
-    categoryRepository.save(category2);
-    categoryRepository.save(category3);
-    categoryRepository.save(category4);
-    categoryRepository.save(category5);
 
-    // Beispiel-Tags
-    var tag1 = new Tag(); tag1.setName("Frontend");
-    var tag2 = new Tag(); tag2.setName("Backend");
-    var tag3 = new Tag(); tag3.setName("Bugfix");
-    var tag4 = new Tag(); tag4.setName("Feature");
-    var tag5 = new Tag(); tag5.setName("Refactoring");
-    tagRepository.save(tag1);
-    tagRepository.save(tag2);
-    tagRepository.save(tag3);
-    tagRepository.save(tag4);
-    tagRepository.save(tag5);
+    @Autowired
+    private CustomerRepository customerRepository;
+    @Autowired
+    private VertragRepository vertragRepository;
+    @Autowired
+    private PartnerRepository partnerRepository;
+    @Autowired
+    private ClaimHandlerRepository claimHandlerRepository;
+    @Autowired
+    private ClaimRepository claimRepository;
 
-    // Beispiel-Einträge für eine Arbeitswoche (Mo-Fr)
-    java.time.LocalDateTime base = java.time.LocalDateTime.now().withHour(8).withMinute(0).withSecond(0).withNano(0);
-    for (int i = 0; i < 5; i++) {
-      var entry = new Vertrag();
-      entry.setDescription("Arbeitstag " + (i + 1));
-      entry.setCheckIn(base.plusDays(i));
-      entry.setDuration(60 + i * 10);
-      // Kategorien rotieren
-      if (i == 0) entry.setCategory(category1);
-      else if (i == 1) entry.setCategory(category2);
-      else if (i == 2) entry.setCategory(category3);
-      else if (i == 3) entry.setCategory(category4);
-      else entry.setCategory(category5);
-      // Tags zuweisen
-      if (entry.getTags() != null) {
-        entry.getTags().add(tag1);
-        if (i % 2 == 0) entry.getTags().add(tag2);
-        if (i % 3 == 0) entry.getTags().add(tag3);
-      }
-      entryRepository.save(entry);
+    @Override
+    public void run(ApplicationArguments args) throws Exception {
+        // Kunden anlegen
+        Customer customer1 = new Customer();
+        customer1.setFirstName("Max");
+        customer1.setLastName("Mustermann");
+        customer1.setDateOfBirth(LocalDate.of(1990, 1, 1));
+        customer1.setAdress("Musterstrasse 1, 8000 Zürich");
+        customer1.setEmail("max@mustermann.ch");
+
+        Customer customer2 = new Customer();
+        customer2.setFirstName("Erika");
+        customer2.setLastName("Musterfrau");
+        customer2.setDateOfBirth(LocalDate.of(1985, 6, 15));
+        customer2.setAdress("Beispielweg 2, 4000 Basel");
+        customer2.setEmail("erika@musterfrau.ch");
+
+        customerRepository.saveAll(Arrays.asList(customer1, customer2));
+
+        // Partner anlegen
+        Partner partner1 = new Partner();
+        partner1.setName("Autohaus AG");
+        partner1.setPartnerType("Werkstatt");
+        partner1.setAddress("Industriestrasse 10, 8600 Dübendorf");
+        partner1.setPhone("044 123 45 67");
+
+        Partner partner2 = new Partner();
+        partner2.setName("Maler GmbH");
+        partner2.setPartnerType("Handwerker");
+        partner2.setAddress("Handwerkerweg 5, 9000 St. Gallen");
+        partner2.setPhone("071 987 65 43");
+
+        partnerRepository.saveAll(Arrays.asList(partner1, partner2));
+
+        // ClaimHandler anlegen
+        ClaimHandler handler1 = new ClaimHandler();
+        handler1.setEmployeeNumber("AXA1001");
+        handler1.setFirstName("Hans");
+        handler1.setLastName("Meier");
+        handler1.setDepartment("Schaden");
+
+        ClaimHandler handler2 = new ClaimHandler();
+        handler2.setEmployeeNumber("AXA1002");
+        handler2.setFirstName("Petra");
+        handler2.setLastName("Schmidt");
+        handler2.setDepartment("Kundenservice");
+
+        claimHandlerRepository.saveAll(Arrays.asList(handler1, handler2));
+
+        // Verträge anlegen
+        Vertrag vertrag1 = new Vertrag();
+        vertrag1.setPolicyNumber("POL123456");
+        vertrag1.setProductName("Haftpflichtversicherung");
+        vertrag1.setStartDate(LocalDate.of(2023, 1, 1));
+        vertrag1.setEndDate(LocalDate.of(2024, 1, 1));
+        vertrag1.setCustomer(customer1);
+
+        Vertrag vertrag2 = new Vertrag();
+        vertrag2.setPolicyNumber("POL654321");
+        vertrag2.setProductName("Hausratversicherung");
+        vertrag2.setStartDate(LocalDate.of(2022, 6, 1));
+        vertrag2.setEndDate(LocalDate.of(2025, 6, 1));
+        vertrag2.setCustomer(customer2);
+
+        vertragRepository.saveAll(Arrays.asList(vertrag1, vertrag2));
+
+        // Claims anlegen
+        Claim claim1 = new Claim();
+        claim1.setDamageDate(LocalDate.of(2023, 3, 10));
+        claim1.setReportDate(LocalDate.of(2023, 3, 11));
+        claim1.setDescription("Wasserschaden im Keller");
+        claim1.setStatus("offen");
+        claim1.setEstimatedAmount(2500.0);
+        claim1.setVertrag(vertrag1);
+        claim1.setPartner(partner1);
+        Set<ClaimHandler> handlers1 = new HashSet<>();
+        handlers1.add(handler1);
+        claim1.setClaimHandlers(handlers1);
+
+        Claim claim2 = new Claim();
+        claim2.setDamageDate(LocalDate.of(2024, 2, 5));
+        claim2.setReportDate(LocalDate.of(2024, 2, 6));
+        claim2.setDescription("Brandschaden in der Küche");
+        claim2.setStatus("in Bearbeitung");
+        claim2.setEstimatedAmount(8000.0);
+        claim2.setVertrag(vertrag2);
+        claim2.setPartner(partner2);
+        Set<ClaimHandler> handlers2 = new HashSet<>();
+        handlers2.add(handler2);
+        claim2.setClaimHandlers(handlers2);
+
+        Claim claim3 = new Claim();
+        claim3.setDamageDate(LocalDate.of(2024, 5, 20));
+        claim3.setReportDate(LocalDate.of(2024, 5, 21));
+        claim3.setDescription("Einbruchdiebstahl");
+        claim3.setStatus("abgeschlossen");
+        claim3.setEstimatedAmount(12000.0);
+        claim3.setVertrag(vertrag1);
+        claim3.setPartner(partner2);
+        Set<ClaimHandler> handlers3 = new HashSet<>();
+        handlers3.add(handler1);
+        handlers3.add(handler2);
+        claim3.setClaimHandlers(handlers3);
+
+        claimRepository.saveAll(Arrays.asList(claim1, claim2, claim3));
     }
-  }
- 
 }

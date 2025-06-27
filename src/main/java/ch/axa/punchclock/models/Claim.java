@@ -1,8 +1,10 @@
 package ch.axa.punchclock.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Table(name = "claim")
@@ -31,6 +33,7 @@ public class Claim {
 
     @ManyToOne
     @JoinColumn(name = "vertrag_id", nullable = false)
+    @JsonIgnoreProperties({"vertraege"})
     private Vertrag vertrag;
 
     @ManyToMany
@@ -38,10 +41,12 @@ public class Claim {
         name = "claim_claimHandler",
         joinColumns = @JoinColumn(name = "claim_id"),
         inverseJoinColumns = @JoinColumn(name = "claimHandler_id"))
-    private ClaimHandler claimHandler;
+    @JsonIgnoreProperties({"claims"})
+    private Set<ClaimHandler> claimHandlers;
 
     @ManyToOne
     @JoinColumn(name = "partner_id")
+    @JsonIgnoreProperties({"claims"})
     private Partner partner;
 
     public Claim() {}
@@ -102,14 +107,6 @@ public class Claim {
         this.vertrag = vertrag;
     }
 
-    public ClaimHandler getClaimHandler() {
-        return claimHandler;
-    }
-
-    public void setClaimHandler(ClaimHandler claimHandler) {
-        this.claimHandler = claimHandler;
-    }
-
     public Partner getPartner() {
         return partner;
     }
@@ -117,6 +114,12 @@ public class Claim {
     public void setPartner(Partner partner) {
         this.partner = partner;
     }
-   
-    
+
+    public Set<ClaimHandler> getClaimHandlers() {
+        return claimHandlers;
+    }
+
+    public void setClaimHandlers(Set<ClaimHandler> claimHandler) {
+        this.claimHandlers = claimHandler;
+    }
 }
