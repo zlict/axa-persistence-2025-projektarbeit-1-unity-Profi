@@ -361,8 +361,14 @@ form input[type="submit"]:active {
   transform: translateY(-2px) scale(1.01);
 }
 /* Enhanced Table with Stunning Animations */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
 table {
   width: 100%;
+  min-width: 1100px; /* Ensures all columns fit, adjust as needed */
   background: rgba(26, 31, 46, 0.95);
   backdrop-filter: blur(20px);
   border-radius: var(--radius-large);
@@ -375,6 +381,17 @@ table {
   animation: tableSlideUp 0.8s var(--transition);
   border: 1px solid rgba(126, 196, 207, 0.3);
   position: relative;
+  table-layout: auto; /* Allow columns to size based on content */
+}
+
+thead th, td {
+  word-break: break-word;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+thead th, td {
+  padding: 1rem 0.7rem;
 }
 
 table::before {
@@ -429,6 +446,7 @@ thead th {
   position: relative;
   cursor: pointer;
   transition: all var(--transition);
+  text-align: left;
 }
 
 thead th:hover {

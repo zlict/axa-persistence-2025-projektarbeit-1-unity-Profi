@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vertraege - Punchclock Client</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="vertraege.js" type="application/javascript"></script>
+</head>
+<body>
+<nav>
+    <ul>
+        <li><a href="/csr/index.html">Entries</a></li>
+        <li><a href="/csr/categories.html">Categories</a></li>
+        <li><a href="/csr/tags.html">Tags</a></li>
+        <li><a href="/csr/claims.html">Claims</a></li>
+        <li><a href="/csr/claim-handlers.html">Claim Handlers</a></li>
+        <li><a href="/csr/customers.html">Customers</a></li>
+        <li><a href="/csr/partners.html">Partners</a></li>
+        <li><a href="/csr/vertraege.html">Vertraege</a></li>
+    </ul>
+</nav>
+<h2>Manage Vertraege</h2>
+<form id="vertragForm">
+    <input type="hidden" name="vertragId" />
+    <label for="policyNumber">Policy Number</label>
+    <input type="text" name="policyNumber" id="policyNumber" required />
+    <label for="productName">Product Name</label>
+    <input type="text" name="productName" id="productName" required />
+    <label for="startDate">Start Date</label>
+    <input type="date" name="startDate" id="startDate" required />
+    <label for="endDate">End Date</label>
+    <input type="date" name="endDate" id="endDate" required />
+    <label for="customerSelect">Customer</label>
+    <select name="customerId" id="customerSelect" required></select>
+    <input type="submit" value="Save" />
+</form>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Policy Number</th>
+            <th>Product Name</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Customer</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody id="vertragDisplay">
+        <tr><td colspan="7">Loading...</td></tr>
+    </tbody>
+</table>
+</body>
+</html>

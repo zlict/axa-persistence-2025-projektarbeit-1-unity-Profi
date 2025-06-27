@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customers - Punchclock Client</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="customers.js" type="application/javascript"></script>
+</head>
+<body>
+<nav>
+    <ul>
+        <li><a href="/csr/index.html">Entries</a></li>
+        <li><a href="/csr/categories.html">Categories</a></li>
+        <li><a href="/csr/tags.html">Tags</a></li>
+        <li><a href="/csr/claims.html">Claims</a></li>
+        <li><a href="/csr/claim-handlers.html">Claim Handlers</a></li>
+        <li><a href="/csr/customers.html">Customers</a></li>
+        <li><a href="/csr/partners.html">Partners</a></li>
+        <li><a href="/csr/vertraege.html">Vertraege</a></li>
+    </ul>
+</nav>
+<h2>Manage Customers</h2>
+<form id="customerForm">
+    <input type="hidden" name="id" />
+    <label for="firstName">First Name</label>
+    <input type="text" name="firstName" id="firstName" required />
+    <label for="lastName">Last Name</label>
+    <input type="text" name="lastName" id="lastName" required />
+    <label for="dateOfBirth">Date of Birth</label>
+    <input type="date" name="dateOfBirth" id="dateOfBirth" required />
+    <label for="adress">Address</label>
+    <input type="text" name="adress" id="adress" required />
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" required />
+    <input type="submit" value="Save" />
+</form>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Date of Birth</th>
+            <th>Address</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody id="customerDisplay">
+        <tr><td colspan="7">Loading...</td></tr>
+    </tbody>
+</table>
+</body>
+</html>

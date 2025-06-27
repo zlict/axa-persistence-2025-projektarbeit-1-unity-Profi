@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partners - Punchclock Client</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="partners.js" type="application/javascript"></script>
+</head>
+<body>
+<nav>
+    <ul>
+        <li><a href="/csr/index.html">Entries</a></li>
+        <li><a href="/csr/categories.html">Categories</a></li>
+        <li><a href="/csr/tags.html">Tags</a></li>
+        <li><a href="/csr/claims.html">Claims</a></li>
+        <li><a href="/csr/claim-handlers.html">Claim Handlers</a></li>
+        <li><a href="/csr/customers.html">Customers</a></li>
+        <li><a href="/csr/partners.html">Partners</a></li>
+        <li><a href="/csr/vertraege.html">Vertraege</a></li>
+    </ul>
+</nav>
+<h2>Manage Partners</h2>
+<form id="partnerForm">
+    <input type="hidden" name="partnerId" />
+    <label for="name">Name</label>
+    <input type="text" name="name" id="name" required />
+    <label for="partnerType">Partner Type</label>
+    <input type="text" name="partnerType" id="partnerType" required />
+    <label for="address">Address</label>
+    <input type="text" name="address" id="address" />
+    <label for="phone">Phone</label>
+    <input type="text" name="phone" id="phone" />
+    <input type="submit" value="Save" />
+</form>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Partner Type</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody id="partnerDisplay">
+        <tr><td colspan="6">Loading...</td></tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claims - Punchclock Client</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="claims.js" type="application/javascript"></script>
+</head>
+<body>
+<nav>
+    <ul>
+        <li><a href="/csr/index.html">Entries</a></li>
+        <li><a href="/csr/categories.html">Categories</a></li>
+        <li><a href="/csr/tags.html">Tags</a></li>
+        <li><a href="/csr/claims.html">Claims</a></li>
+        <li><a href="/csr/claim-handlers.html">Claim Handlers</a></li>
+        <li><a href="/csr/customers.html">Customers</a></li>
+        <li><a href="/csr/partners.html">Partners</a></li>
+        <li><a href="/csr/vertraege.html">Vertraege</a></li>
+    </ul>
+</nav>
+<h2>Manage Claims</h2>
+<form id="claimForm">
+    <input type="hidden" name="claimId" />
+    <label for="damageDate">Damage Date</label>
+    <input type="date" name="damageDate" id="damageDate" required />
+    <label for="reportDate">Report Date</label>
+    <input type="date" name="reportDate" id="reportDate" required />
+    <label for="description">Description</label>
+    <input type="text" name="description" id="description" />
+    <label for="status">Status</label>
+    <input type="text" name="status" id="status" />
+    <label for="estimatedAmount">Estimated Amount</label>
+    <input type="number" step="0.01" name="estimatedAmount" id="estimatedAmount" />
+    <label for="vertragSelect">Vertrag</label>
+    <select name="vertragId" id="vertragSelect" required></select>
+    <label for="partnerSelect">Partner</label>
+    <select name="partnerId" id="partnerSelect"></select>
+    <label for="claimHandlersSelect">Claim Handlers</label>
+    <div id="claimHandlersSelect">No claim handlers</div>
+    <input type="submit" value="Save" />
+</form>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Damage Date</th>
+            <th>Report Date</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Estimated Amount</th>
+            <th>Vertrag</th>
+            <th>Partner</th>
+            <th>Claim Handlers</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody id="claimDisplay">
+        <tr><td colspan="10">Loading...</td></tr>
+    </tbody>
+</table>
+</body>
+</html>
