@@ -375,6 +375,7 @@ table {
   box-shadow: var(--shadow-large);
   border-collapse: separate;
   border-spacing: 0;
+  margin: 2rem auto;
   max-width: 900px;
   overflow: hidden;
   animation: tableSlideUp 0.8s var(--transition);
@@ -387,16 +388,6 @@ thead th, td {
   word-break: break-word;
   white-space: normal;
   overflow-wrap: anywhere;
-  font-size: 0.85rem; /* Reduced font size for better fit */
-  padding: 0.7rem 0.5rem; /* Slightly reduced padding */
-}
-
-thead th {
-  font-size: 0.95rem; /* Reduced header font size */
-}
-
-table, thead th, tbody td, td, th {
-  font-size: 0.85rem; /* Consistent smaller font size for all table text */
 }
 
 thead th, td {
@@ -404,11 +395,11 @@ thead th, td {
 }
 
 table, thead th, tbody td, td, th {
-  font-size: 0.85rem;
+  font-size: 1.1rem;
 }
 
 thead th {
-  font-size: 0.95rem;
+  font-size: 0.55rem;
 }
 
 table::before {
