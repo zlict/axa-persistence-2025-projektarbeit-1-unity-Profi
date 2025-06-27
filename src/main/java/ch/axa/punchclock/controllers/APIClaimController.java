@@ -30,7 +30,13 @@ public class APIClaimController {
 
   @GetMapping
   @Operation(summary = "Get all claims", description = "Returns a list of all claims.")
-  public Iterable<Claim> index() {
+  public Iterable<Claim> index(@RequestParam(required = false) Double estimatedAmount, @RequestParam(required = false) Long customerId) {
+     if (customerId != null) {
+      return claimRepository.findByVertrag_Customer_Id(customerId);
+    }
+    if (estimatedAmount != null) {
+      return claimRepository.findByEstimatedAmount(estimatedAmount);
+    }
     return claimRepository.findAll();
   }
 

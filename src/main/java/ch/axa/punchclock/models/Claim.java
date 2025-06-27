@@ -35,7 +35,7 @@ public class Claim {
     @JoinColumn(name = "vertrag_id", nullable = false)
     @JsonIgnoreProperties({"vertraege"})
     private Vertrag vertrag;
-
+    
     @ManyToMany
     @JoinTable(
         name = "claim_claimHandler",
