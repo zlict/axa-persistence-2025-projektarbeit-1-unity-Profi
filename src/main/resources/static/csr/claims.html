@@ -18,6 +18,14 @@
     </ul>
 </nav>
 <h2 style="text-align: center;">Manage Claims</h2>
+<div style="max-width:900px;margin:0 auto 1.5rem auto;display:flex;gap:1rem;align-items:center;justify-content:flex-start;">
+    <label for="filterCustomerId" style="color:var(--accent);font-weight:600;">Customer ID:</label>
+    <input type="number" id="filterCustomerId" placeholder="Enter Customer ID" style="padding:0.5rem 1rem;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--text);width:120px;">
+    <label for="filterFirstName" style="color:var(--accent);font-weight:600;">First Name:</label>
+    <input type="text" id="filterFirstName" placeholder="Enter First Name" style="padding:0.5rem 1rem;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--text);width:140px;">
+    <button id="filterClaimsBtn" style="margin-left:1rem;">Filter</button>
+    <button id="clearFilterBtn" class="button-secondary">Clear</button>
+</div>
 <form id="claimForm">
     <input type="hidden" name="claimId" />
     <label for="damageDate">Damage Date</label>

@@ -184,4 +184,29 @@ document.addEventListener('DOMContentLoaded', function () {
   indexVertraege();
   indexPartners();
   indexClaimHandlers();
+
+  const filterBtn = document.getElementById('filterClaimsBtn');
+  const clearBtn = document.getElementById('clearFilterBtn');
+  const filterCustomerId = document.getElementById('filterCustomerId');
+  const filterFirstName = document.getElementById('filterFirstName');
+
+  filterBtn.addEventListener('click', function() {
+    const customerId = filterCustomerId.value.trim();
+    const firstName = filterFirstName.value.trim();
+    let url = `${URL}/claims`;
+    const params = [];
+    if (customerId) params.push(`customerId=${encodeURIComponent(customerId)}`);
+    if (firstName) params.push(`firstName=${encodeURIComponent(firstName)}`);
+    if (params.length > 0) url += '?' + params.join('&');
+    fetch(url).then(r => r.json()).then(result => {
+      claims = result;
+      renderClaims();
+    });
+  });
+
+  clearBtn.addEventListener('click', function() {
+    filterCustomerId.value = '';
+    filterFirstName.value = '';
+    indexClaims();
+  });
 });
